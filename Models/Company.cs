@@ -1,4 +1,4 @@
-namespace Net6.CustomBinding;
+namespace Net6.CustomBinding.Models;
 
 public class Company
 {

@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-
-namespace Net6.CustomBinding;
+namespace Net6.CustomBinding.Models;
 
 [ApiController]
 [Route("[controller]")]
@@ -19,7 +18,7 @@ public class CompanyController : ControllerBase
     [HttpPost]
     public Company CreateCompany(Company company)
     {
-        // your logic to create the company.
+        //* your logic to create the company.
 
         // created company, with Id.
         company.Id = new Random(23).Next();
