@@ -1,4 +1,3 @@
-using System.Dynamic;
 using Microsoft.AspNetCore.Mvc;
 using Net6.CustomBinding.Models;
 
