@@ -1,5 +1,8 @@
+using System.Text.Json.Serialization;
+
 namespace Net6.CustomBinding.Models;
 
+[JsonNumberHandling(JsonNumberHandling.WriteAsString | JsonNumberHandling.AllowReadingFromString)]
 public class Company
 {
     public int Id { get; set; }
