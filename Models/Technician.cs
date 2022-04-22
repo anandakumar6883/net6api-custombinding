@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Net6.CustomBinding.Models;
 
+[JsonNumberHandling(JsonNumberHandling.WriteAsString | JsonNumberHandling.AllowReadingFromString)]
 public class Technician
 {
     [JsonPropertyName("technician_id")]
@@ -15,11 +16,11 @@ public class Technician
     [JsonPropertyName("last_name")]
     public string? LastName { get; set; }
     [JsonPropertyName("meisterpruefung_date")]
-    public DateTime MeisterpruefungDate { get; set; }
+    public DateOnly MeisterpruefungDate { get; set; }
     [JsonPropertyName("meisterpruefung_bei")]
     public string? MeisterpruefungBei { get; set;}
     public string? Email { get; set; }
-    public DateTime Birthday { get; set; }
+    public DateOnly Birthday { get; set; }
      [JsonPropertyName("concession_water")]
     public int ConcessionWater { get; set; }
     [JsonPropertyName("concession_gas")]
@@ -29,6 +30,9 @@ public class Technician
     [JsonPropertyName("concession_district_heating")]
     public int ConcessionDistrictHeating { get; set; }
     [JsonPropertyName("concession_valid_until")]
-    public DateTime ConcessionValidUntil { get; set; }
-   
+    public DateOnly ConcessionValidUntil { get; set; }
+
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    public IEnumerable<Company>? Company { get; set; }
+     
 }

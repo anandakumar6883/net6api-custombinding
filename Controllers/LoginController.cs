@@ -8,7 +8,7 @@ namespace Net6.CustomBinding;
 public class LoginController : ControllerBase
 {
     [HttpPost("Authenticate")]
-    public IActionResult Authenticate(LoginRequest user)
+    public async Task<IActionResult> Authenticate(LoginRequest user)
     {
 
         //* for checking if the model binding works as expected *//
@@ -25,7 +25,9 @@ public class LoginController : ControllerBase
             Technician = new List<Technician>() { Mock.GetTechnician() }
         };
 
-        return Ok(WrapLoginResponse(output));
+        //return Ok(output);                                    // without any conversion
+        //return Ok(FormatAuthenticateResponse(output));        // using dynamic object preparation
+        return Ok(await JsonUtilities.JsonSerializeNestedClassAsync(output, JsonUtilities.APISerializationOptions()));        // using custom JsonConverter
     }
 
     [HttpGet("dynamic")]
@@ -46,7 +48,7 @@ public class LoginController : ControllerBase
 
     #region Helper Method
 
-    private object WrapLoginResponse(LoginResponse data)
+    private object FormatAuthenticateResponse(LoginResponse data)
     {
         dynamic arrayOfData = new[] { data };
         return new { Login = arrayOfData };
